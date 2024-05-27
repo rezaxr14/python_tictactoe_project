@@ -1,0 +1,151 @@
+# import itertools
+# import tkinter
+# from tkinter import font
+# from PIL import Image, ImageTk
+# import Constants
+#
+# width, height = Constants.WIDTH, Constants.HEIGHT
+# player = "X"
+# background = "gray"
+# already_clicked = [False for _ in range(9)]
+# x_moves = []
+# o_moves = []
+# win: []
+# x_image: ImageTk.PhotoImage
+# o_image: ImageTk.PhotoImage
+# def_image: ImageTk.PhotoImage
+# background_image: ImageTk.PhotoImage
+# background_image2: ImageTk.PhotoImage
+# restart_image: ImageTk.PhotoImage
+# change_image: ImageTk.PhotoImage
+# xwin_image: ImageTk.PhotoImage
+# owin_image: ImageTk.PhotoImage
+#
+#
+# def all_wining_combo_maker(o_win = Constants.WIN):
+#     combo = []
+#     for w in o_win:
+#         combo.extend((itertools.permutations(w, 3)))
+#     return combo
+#
+#
+# def initialize_values():
+#     global win, x_image, o_image, def_image, background_image, background_image2, restart_image, \
+#         change_image, xwin_image, owin_image
+#     win = all_wining_combo_maker(Constants.WIN)
+#     # Image
+#     x_image = ImageTk.PhotoImage(Image.open(Constants.x_path))
+#     o_image = ImageTk.PhotoImage(Image.open(Constants.o_path))
+#     def_image = ImageTk.PhotoImage(Image.open(Constants.def_path))
+#     background_image = ImageTk.PhotoImage(Image.open(Constants.background_path))
+#     background_image2 = ImageTk.PhotoImage(Image.open(Constants.background_path2))
+#     restart_image = ImageTk.PhotoImage(Image.open(Constants.restart_path))
+#     change_image = ImageTk.PhotoImage(Image.open(Constants.change_path))
+#     xwin_image = ImageTk.PhotoImage(Image.open(Constants.xwin_path))
+#     owin_image = ImageTk.PhotoImage(Image.open(Constants.owin_path))
+#
+#
+# def clicked(coordinates):
+#     global player, already_clicked, x_moves, o_moves
+#     item = can.find_closest(coordinates.x, coordinates.y)
+#     item_tag = can.gettags(item[0])[0]
+#     if player == "X" and already_clicked[int(item_tag[-1])] is False:
+#         can.itemconfig(item_tag, image=x_image)
+#         x_moves.append(int(item_tag[-1]))
+#         player = "O"
+#         already_clicked[int(item_tag[-1])] = True
+#         check_win()
+#     elif player == "O" and already_clicked[int(item_tag[-1])] is False:
+#         can.itemconfig(item_tag, image=o_image)
+#         o_moves.append(int(item_tag[-1]))
+#         player = "X"
+#         already_clicked[int(item_tag[-1])] = True
+#         check_win()
+#
+#
+# def initialize_coordination(canvas: tkinter.Canvas) -> None:
+#     for i in range(9):
+#         match i:
+#             case 0:
+#                 x_coordination, y_coordination = 150, 150
+#             case 1:
+#                 x_coordination, y_coordination = 60 * 5, 150
+#             case 2:
+#                 x_coordination, y_coordination = 60 * 7 + 25, 150
+#             case 3:
+#                 x_coordination, y_coordination = 150, 150 * 2
+#             case 4:
+#                 x_coordination, y_coordination = 60 * 5, 150 * 2
+#             case 5:
+#                 x_coordination, y_coordination = 60 * 7 + 25, 150 * 2
+#             case 6:
+#                 x_coordination, y_coordination = 150, 150 * 3
+#             case 7:
+#                 x_coordination, y_coordination = 60 * 5, 150 * 3
+#             case 8:
+#                 x_coordination, y_coordination = 60 * 7 + 25, 150 * 3
+#         # noinspection PyUnboundLocalVariable
+#         canvas.create_image(x_coordination, y_coordination, image=def_image, tag=f"cell{i}")
+#         canvas.tag_bind(f"cell{i}", "<Button-1>", clicked)
+#
+#     canvas.create_image(200, 565, image=restart_image, tag=f"restart")
+#     canvas.tag_bind(f"restart", "<Button-1>", restart)
+#
+#     canvas.create_image(400, 555, image=change_image, tag=f"change")
+#     canvas.tag_bind(f"change", "<Button-1>", alternate_background)
+#
+#
+# def check_win():
+#     global x_moves, o_moves
+#     if len(x_moves) >= 3:
+#         x_moves_combo = itertools.combinations(x_moves, 3)
+#         o_moves_combo = itertools.combinations(o_moves, 3)
+#         for x in x_moves_combo:
+#             if x in win:
+#                 can.create_image(300, 300, image=xwin_image, tag="play_again")
+#                 can.tag_bind("play_again", "<Button-1>", play_again)
+#         for o in o_moves_combo:
+#             if o in win:
+#                 can.create_image(300, 300, image=owin_image, tag="play_again")
+#                 can.tag_bind("play_again", "<Button-1>", play_again)
+#
+#
+# def restart(event):
+#     global player, already_clicked, x_moves, o_moves, background
+#     player = "X"
+#     already_clicked = [False for _ in range(9)]
+#     x_moves = []
+#     o_moves = []
+#     for i in range(9):
+#         can.itemconfig(f"cell{i}", image=def_image)
+#
+#
+# def play_again(event):
+#     can.delete("play_again")
+#     restart(event)
+#
+#
+# def alternate_background(event):
+#     global background
+#     if background == "gray":
+#         background = "pink"
+#         can.itemconfig("background", image=background_image)
+#     elif background == "pink":
+#         background = "gray"
+#         can.itemconfig("background", image=background_image2)
+#
+#
+# if __name__ == "__main__":
+#     root = tkinter.Tk()
+#     root.geometry(f"{width}x{height}")
+#     root.resizable(width=False, height=False)
+#     root.title("Tik Tac Toe!")
+#     root.iconbitmap(Constants.icon)
+#     initialize_values()
+#     can = tkinter.Canvas(root, height=height, width=width)
+#     can.create_image(300, 300, image=background_image, tag="background")
+#     font = font.Font(family='Helvetica', size=32, weight='bold')
+#     can.create_text(60 * 5, 35, fill='#6c19ab', font=font, text="Tic Tac Toe Game!")
+#     initialize_coordination(can)
+#     can.pack(anchor=tkinter.CENTER)
+#     root.mainloop()
