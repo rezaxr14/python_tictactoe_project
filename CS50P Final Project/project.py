@@ -13,7 +13,7 @@ class Ticktacktoe(Tk):
     already_clicked = [False for _ in range(9)]
     x_moves = []
     o_moves = []
-    win: []
+    win= []
     x_image: ImageTk.PhotoImage
     o_image: ImageTk.PhotoImage
     def_image: ImageTk.PhotoImage
@@ -23,6 +23,7 @@ class Ticktacktoe(Tk):
     change_image: ImageTk.PhotoImage
     x_win_image: ImageTk.PhotoImage
     o_win_image: ImageTk.PhotoImage
+    no_winner_image: ImageTk.PhotoImage
     combo = []
     game_over = False
     game_over_message: Canvas.create_text
@@ -47,6 +48,7 @@ class Ticktacktoe(Tk):
         self.change_image = ImageTk.PhotoImage(Image.open(Constants.change_path))
         self.x_win_image = ImageTk.PhotoImage(Image.open(Constants.x_win_path))
         self.o_win_image = ImageTk.PhotoImage(Image.open(Constants.o_win_path))
+        self.no_winner_image = ImageTk.PhotoImage(Image.open(Constants.no_winner_path))
         # creating a tkinter Canvas
         self.can = Canvas(self, height=self.height, width=self.width)
         self.can.create_image(300, 300, image=self.background_image, tag="background")
@@ -129,6 +131,12 @@ class Ticktacktoe(Tk):
                     self.can.create_image(300, 300, image=self.o_win_image, tag="play_again")
                     self.can.tag_bind("play_again", "<Button-1>", self.play_again)
                     self.game_over = True
+            
+            if self.already_clicked == [True for _ in range(9)] and self.game_over == False:
+                self.can.create_image(300, 300, image=self.no_winner_image, tag="play_again")
+                self.can.tag_bind("play_again", "<Button-1>", self.play_again)
+                self.game_over = True
+
             if self.game_over is True:
                 self.game_over_message = self.can.create_text(300, 520, font=self.font,
                                                               text="Click anywhere to play again!", fill='#6c19ab')
