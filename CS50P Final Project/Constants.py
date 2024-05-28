@@ -8,6 +8,7 @@ restart_path = "./resources/restart.png"
 change_path = "./resources/change.png"
 x_win_path = "./resources/X_WIN.png"
 o_win_path = "./resources/O_WIN.png"
+no_winner_path = "./resources/NO_WINNER_IMG.jpg"
 icon = "./resources/icon.ico"
 
 WIN = [
