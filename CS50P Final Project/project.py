@@ -5,7 +5,7 @@ from PIL import Image, ImageTk
 
 
 # creating the ticktacktoe class which extends Tk class and adds the game logic and aesthetics to the class
-# For simplicity’s sake I didn't use Setter(s) and Getter(s) in this project
+# For simplicity I didn't use Setter(s) and Getter(s) in this project
 class Ticktacktoe(Tk):
     width, height = Constants.WIDTH, Constants.HEIGHT
     player = "X"
