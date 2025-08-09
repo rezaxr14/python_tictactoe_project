@@ -1,7 +1,19 @@
 # Awesome Graphical Tic-Tac-Toe Game
 
 #### Video Demo: [https://youtu.be/otDqchy0o4s](https://youtu.be/otDqchy0o4s)
+## Screenshots
 
+| Starting Game (Background 1) | Gameplay (Background 1) |
+| :--------------------------: | :---------------------: |
+| ![Starting Game Background 1]([https://i.imgur.com/your_image_link_1.jpg](https://github.com/rezaxr14/python_tictactoe_project/blob/main/screenshots/bg1.png)) | ![Gameplay Background 1](https://github.com/rezaxr14/python_tictactoe_project/blob/main/screenshots/gameplay_bg1.png) |
+
+| Starting Game (Background 2) | Gameplay (Background 2) |
+| :--------------------------: | :---------------------: |
+| ![Starting Game Background 2](https://github.com/rezaxr14/python_tictactoe_project/blob/main/screenshots/bg2.png) | ![Gameplay Background 2](https://github.com/rezaxr14/python_tictactoe_project/blob/main/screenshots/gameplay_bg2.png) |
+
+| No Winner |
+| :-------: |
+| ![No Winner](https://github.com/rezaxr14/python_tictactoe_project/blob/main/screenshots/no_body_wins.png) |
 This is an implementation of the classic Tic-Tac-Toe game with a graphical user interface built using **Python** and **Tkinter**. Challenge a friend and see who can get three in a row first!
 
 ***
